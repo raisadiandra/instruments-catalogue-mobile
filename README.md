@@ -73,3 +73,34 @@ Kelas: PBP E
         Pada widget Align di shoplist_form.dart, pada SingleChildScrollView, dibuat child lagi, dan ditampilkan tulisan sesuai data input. Kemudian, apabila ditekan, menggunakan onPressed(), navigator akan melakukan pop() terhadap tulisan tersebut.
     - Membuat sebuah drawer pada aplikasi.
         Saya membuat file baru bernama left_drawer.dart untuk drawer. Dalam file tersebut, dibuat widget Drawer untuk menampilkan drawer. Dibuat juga ListTile untuk menampilkan halaman utama dan tambah produk. Dalam kedua ListTile tersebut, apabila ditekan, masuk ke fungsi onTap(), yang akan menggunakan pushReplacement() untuk melakukan routing ke MyHomePage() ke halaman utama dan ShopFormPage() ke halaman form. 
+
+## Jawaban Tugas 9
+
+1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+    Kita bisa melakukan pengambilan data JSON tanpa membuat model terlebih dahulu. Namun, untuk yang mana yang lebih baik, tergantung dengan kebutuhan kita. Apabila kita butuh dengan cepat dan sederhana serta hanya untuk sementara, kita bisa tidak menggunakan model. Namun, apabila kita mau agar proyek terstruktur dengan jelas dan bisa dikembangkan lebih lanjut, lebih baik menggunakan model.
+
+2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+    CookieRequest berfungsi untuk melakukan manajemen cookie mengenai data sementara yang akan disimpan. CookieRequest harus dibagikan ke seluruh komponen di aplikasi karena cookie harus disimpan untuk seluruh halaman dan mengurangi meminta ulang autentikasi.
+
+3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+    Pertama dilakukan ambil data dari JSON. Setelah itu, dilakukan konversi data dari bentuk JSON menjadi struktur Dart. Kemudian, data dapat ditampilkan di Flutter dengan cara menambahkan widget baru untuk menampilkan data.
+
+4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+    Pertama, pengguna dapat melakukan input data akun pada Flutter, kemudian aplikasi Flutter akan membuat permintaan HTTP ke endpoint Django yang mengurus pendaftaran akun baru. Kemudian, Django akan menyimpan data akun baru pada database. Setelah itu, pengguna dapat melakukan login pada Flutter dan Flutter akan membuat permintaan kembali kepada Django. Setelah mendapat autentikasi dari Django, aplikasi Flutter dapat menampilkan menu.
+
+5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+    - Provider: menyediakan instance CookieRequest.
+    - FutureBuilder: menangani pemanggilan asinkronus ke JSON.
+    - CookieRequest: mengelola cookie yang digunakan.    
+
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+    - Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.
+        Setelah menyelesaikan tugas ini, saya melakukan push kembali ke directory GitHub instruments-catalogue dan otomatis ter-deploy.
+    - Membuat halaman login pada proyek tugas Flutter.
+        Pertama saya membuat aplikasi baru pada Django dengan nama authentication. Dalam views di authentication, saya membuat fungsi login yang meminta username dan password serta melakukan return berbentuk JsonResponse. Fungsi tersebut juga ditambahkan path-nya di urls.py. Kemudian, di Flutter, saya membuat page untuk login dan memasukkan kode untuk login. Dilakukan pula integrasi agar Flutter dan Django tersambung.
+    - Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+        Saya melakukan instalasi provider dan package pbp_django_auth. Di main, saya menambahkan kode untuk CookieRequest agar bisa digunakan.
+    - Membuat model kustom sesuai dengan proyek aplikasi Django.
+        Dilakukan konversi kode menggunakan Quicktype dan kode hasil konversi tersebut dimasukkan ke dalam product.dart agar menjadi model dalam aplikasi Flutter.
+    - Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+        Pertama dilakukan fetch data dari halaman Django. Fetch dilakukan dengan cara menggunakan async dan await hingga data didapatkan. Model yang telah dibuat dapat digunakan sehingga dilakukan impor dari product.dart pada file-file yang sudah digunakan. Kemudian, dibuat file baru bernama list_product.dart untuk menampilkan data dan dimasukkan kode. Kode di left_drawer dan shop_card juga ditambahkan agar halaman list_product dapat diakses.
